@@ -86,8 +86,8 @@
     "prepare": "husky",
     "publish:preview": "pkg-pr-new publish './build/package' --pnpm --template='./sample/playground'",
     "test": "npm run compile && npm run test:fast --",
-    "test:ci": "mocha --bail",
-    "test:fast": "mocha",
+    "test:ci": "mocha",
+    "test:fast": "mocha --enable-source-maps --inspect",
     "typecheck": "tsc --noEmit",
     "watch": "tsc --watch"
   },
