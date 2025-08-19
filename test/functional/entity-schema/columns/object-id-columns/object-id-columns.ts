@@ -27,9 +27,9 @@ describe.only("entity-schema > columns > object id", () => {
                 const repo = connection.getMongoRepository(Activity)
                 await repo.save({ k1: 1 })
                 const result = (await repo.find())!
+                console.log(result)
                 expect(result.length).eq(1)
                 expect(result[0].id).ok
-                console.log(result)
             }),
         )
     })
