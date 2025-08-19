@@ -9,7 +9,7 @@ import { Post } from "./entity/Post"
 import { PostWithUnderscoreId } from "./entity/PostWithUnderscoreId"
 import { expect } from "chai"
 
-describe("mongodb > object id columns", () => {
+describe.only("mongodb > object id columns", () => {
     let connections: DataSource[]
     before(
         async () =>
@@ -30,6 +30,9 @@ describe("mongodb > object id columns", () => {
                 const post = new Post()
                 post.title = "Post"
                 await postMongoRepository.save(post)
+                const result = await postMongoRepository.find()
+                // eslint-disable-next-line
+                console.log("这里?1", result)
 
                 // little hack to get raw data from mongodb
                 const aggArr = await postMongoRepository.aggregate([]).toArray()
@@ -48,7 +51,9 @@ describe("mongodb > object id columns", () => {
                 const post = new Post()
                 post.title = "Post"
                 await postMongoRepository.save(post)
-
+                const result = await postMongoRepository.find()
+                // eslint-disable-next-line
+                console.log("这里?2", result)
                 expect(post.nonIdNameOfObjectId).to.be.not.undefined
                 expect((post as any)._id).to.be.undefined
             }),
@@ -64,7 +69,9 @@ describe("mongodb > object id columns", () => {
                 const post = new PostWithUnderscoreId()
                 post.title = "Post"
                 await postMongoRepository.save(post)
-
+                const result = await postMongoRepository.find()
+                // eslint-disable-next-line
+                console.log("这里?3", result)
                 expect(post._id).to.be.not.undefined
 
                 const loadedPost = await postMongoRepository.findOneBy({
@@ -87,7 +94,9 @@ describe("mongodb > object id columns", () => {
                 post.title = "Muhaha changed title"
 
                 await postMongoRepository.save(post)
-
+                const result = await postMongoRepository.find()
+                // eslint-disable-next-line
+                console.log("这里?4", result)
                 expect(post.nonIdNameOfObjectId).to.be.not.undefined
                 expect((post as any)._id).to.be.undefined
 
