@@ -27,7 +27,9 @@ describe.only("entity-schema > columns > object id", () => {
             connections.map(async (connection) => {
                 const repo = connection.getMongoRepository(Activity)
                 await repo.save({ k1: 1 })
-                const result = (await repo.find())!
+                const result = (await repo.find({
+                    select: { id: true, k1: true },
+                }))!
                 console.log(result)
                 expect(result.length).eq(1)
                 expect(result[0].id).ok
