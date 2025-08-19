@@ -16,6 +16,7 @@ describe.only("entity-schema > columns > object id", () => {
             (connections = await createTestingConnections({
                 entities: [<any>Activity],
                 enabledDrivers: ["mongodb"],
+                logging: true,
             })),
     )
     beforeEach(() => reloadTestingDatabases(connections))
